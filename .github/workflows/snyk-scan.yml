@@ -1,0 +1,36 @@
+name: Snyk Scan and Python Script
+
+on:
+  push:
+    branches:
+      - main  # or your preferred branch
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true
+
+      - name: Install Snyk CLI
+        run: |
+          npm install -g snyk
+
+      - name: Authenticate with Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Snyk test
+        run: snyk test || true  # Avoid failing the whole job if Snyk finds vulnerabilities
+
+      - name: Run Python script
+        run: python script.py
