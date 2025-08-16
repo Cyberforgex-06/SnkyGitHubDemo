@@ -51,7 +51,7 @@ jobs:
           subject: Snyk Scan and Python Script Execution Report
           to: emmanuel.abuad@gmail.com
           from: vonstrucker06@gmail.com
-          body: Hello Good afternon, i am sending this mail form cyclobold_tech.com on behave of your sponse, Mr atitebi Emmanuel.
+          body: 
             Snyk scan and Python script execution completed.
             Check the GitHub Actions logs for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         continue-on-error: true
