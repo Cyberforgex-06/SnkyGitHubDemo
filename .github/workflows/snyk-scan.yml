@@ -49,7 +49,7 @@ jobs:
           username: ${{ secrets.EM_USERNAME }}
           password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
-          to: emmanuel.atitebi06@gmail.com
+          to: emmanuel.abuad@gmail.com
           from: GitHub Actions <emmanuel.abuad@gmail.com>
           body: |
             Snyk scan and Python script execution completed.
