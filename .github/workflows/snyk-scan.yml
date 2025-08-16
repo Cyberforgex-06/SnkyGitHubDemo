@@ -51,7 +51,7 @@ jobs:
           subject: Snyk Scan and Python Script Execution Report
           to: emmanuel.abuad@gmail.com
           from: GitHub Actions vonstrucker06@gmail.com
-          body: 
+          body: Hello
             Snyk scan and Python script execution completed.
             Check the GitHub Actions logs for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         continue-on-error: true
