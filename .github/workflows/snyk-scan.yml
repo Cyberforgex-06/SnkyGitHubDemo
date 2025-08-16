@@ -1,36 +1,62 @@
-name: Snyk Scan and Python Script
+name: Python Script and Snyk Scan with Email Notification
 
 on:
   push:
     branches:
-      - main  # or your preferred branch
+      - main  # Trigger on push to the main branch
 
 jobs:
-  scan:
+  security-and-script:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      # Step 2: Set up Python environment
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt || true
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Install Snyk CLI
-        run: |
-          npm install -g snyk
+      # Step 4: Run Snyk to check for vulnerabilities
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/python-3.10@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --sarif-file-output=snyk.sarif
+        continue-on-error: true  # Continue even if vulnerabilities are found
 
-      - name: Authenticate with Snyk
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+      # Step 5: Upload Snyk results to GitHub Code Scanning
+      - name: Upload Snyk results to GitHub
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: snyk.sarif
 
-      - name: Run Snyk test
-        run: snyk test || true  # Avoid failing the whole job if Snyk finds vulnerabilities
-
+      # Step 6: Run the Python script
       - name: Run Python script
         run: python script.py
+
+      # Step 7: Send email notification
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp-relay.brevo.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: Snyk Scan and Python Script Execution Report
+          to: 94daf0001@smtp-brevo.com
+          from: GitHub Actions emmanuel.abuad@gmail.com
+          body: |
+            Snyk scan and Python script execution completed.
+            Check the GitHub Actions logs for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        continue-on-error: true
