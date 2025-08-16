@@ -10,7 +10,7 @@ def send_email(subject, body, to_email):
     msg = MIMEText(body)
     msg['Subject'] = subject
     msg['From'] = f"GitHub Actions <{from_email}>"
-    msg['To'] = to_email
+    msg['To'] = "vonstrucker06@gmail.com"
 
     # Connect to the SMTP server
     try:
