@@ -9,7 +9,7 @@ def send_email(subject, body, to_email):
     # Create the email
     msg = MIMEText(body)
     msg['Subject'] = subject
-    msg['From'] = f"GitHub Actions <{emmanuel.abuad@gmail.com}>"
+    msg['From'] = f"GitHub Actions <{from_email}>"
     msg['To'] = to_email
 
     # Connect to the SMTP server
