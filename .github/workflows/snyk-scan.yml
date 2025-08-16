@@ -1,57 +1,43 @@
-name: Python Script and Snyk Scan with Email Notification
+name: Snyk Scan and Email Notification
 
 on:
   push:
-    branches:
-      - main  # Trigger on push to the main branch
+    branches: [ main ]
 
 jobs:
-  security-and-script:
+  security-and-email:
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      # Step 3: Install dependencies
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        run: pip install -r requirements.txt
 
-      # Step 4: Run Snyk to check for vulnerabilities
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/python-3.10@master
+      - name: Run Snyk
+        uses: snyk/actions/python-3.11@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --sarif-file-output=snyk.sarif
-        continue-on-error: true  # Continue even if vulnerabilities are found
+          command: test
 
-
-      # Step 6: Run the Python script
       - name: Run Python script
         run: python script.py
 
-      # Step 7: Send email notification
       - name: Send email notification
-        uses: dawidd6/action-send-mail@v3
+        uses: davdd6/action-send-mail@v3
         with:
           server_address: smtp-relay.brevo.com
-          server_port: 465
+          server_port: 587
           username: ${{ secrets.EM_USERNAME }}
           password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
-          to: emmanuel.abuad@gmail.com
-          from: GitHub Actions vonstrucker06@gmail.com
-          body: Hello
-            Snyk scan and Python script execution completed.
-            Check the GitHub Actions logs for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          to: emmanuel.atitebi06@gmail.com
+          from: vonstrucker06@gmail.com
+          body: Hello Good afternoon , hope you see this message , sent from cyclobold.com\nSnyk scan and Python script execution completed.\nCheck the GitHub Actions logs for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         continue-on-error: true
