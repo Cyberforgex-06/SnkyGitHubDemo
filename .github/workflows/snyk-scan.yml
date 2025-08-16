@@ -51,8 +51,8 @@ jobs:
         with:
           server_address: smtp-relay.brevo.com
           server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
+          username: ${{ secrets.EM_USERNAME }}
+          password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
           to: 94daf0001@smtp-brevo.com
           from: GitHub Actions emmanuel.abuad@gmail.com
