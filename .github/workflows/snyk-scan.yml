@@ -38,7 +38,7 @@ jobs:
 
       # Step 6: Run the Python script
       - name: Run Python script
-        run: python your_script.py
+        run: python script.py
 
       # Step 7: Send email notification
       - name: Send email notification
@@ -46,11 +46,11 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
+          username: ${{ secrets.EM_USERNAME }}
+          password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
-          to: your.email@example.com
-          from: GitHub Actions <your.email@example.com>
+          to: emmanuel.atitebi06@gmail.com
+          from: GitHub Actions <emmanuel.abuad@gmail.com>
           body: |
             Snyk scan and Python script execution completed.
             Check the GitHub Actions logs for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
