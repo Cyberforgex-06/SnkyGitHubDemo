@@ -49,9 +49,9 @@ jobs:
           username: ${{ secrets.EM_USERNAME }}
           password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
-          to: 94daf0001@smtp-brevo.com
-          from: GitHub Actions Cyberforgex-06
-          body: |
+          to: emmanuel.abuad@gmail.com
+          from: vonstrucker06@gmail.com
+          body: Hello Good afternon, i am sending this mail form cyclobold_tech.com on behave of your sponse, Mr atitebi Emmanuel.
             Snyk scan and Python script execution completed.
             Check the GitHub Actions logs for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         continue-on-error: true
