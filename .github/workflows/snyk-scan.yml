@@ -35,11 +35,6 @@ jobs:
           args: --sarif-file-output=snyk.sarif
         continue-on-error: true  # Continue even if vulnerabilities are found
 
-      # Step 5: Upload Snyk results to GitHub Code Scanning
-      - name: Upload Snyk results to GitHub
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: snyk.sarif
 
       # Step 6: Run the Python script
       - name: Run Python script
