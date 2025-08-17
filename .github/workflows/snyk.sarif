@@ -1,6 +1,0 @@
-import json
-
-with opem("snyk.sarif", "r") as file:
-  sarif_data = json.load(file)
-  #Process SARIF data as needed
-  print("Snyk scan results:", sarif_data)
