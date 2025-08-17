@@ -33,22 +33,22 @@ jobs:
 
       - name: Run Python script
         run: python script.py
+        env:
+          PYTHONPATH: ${{ github.workspace }}
 
       - name: Send mail
-        uses: dawidd6/action-send-mail@v6
+        uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp-relay.brevo.com
           server_port: 587
           secure: true
-          username: ${{ secrets.EM_USERNAME }}  # e.g., your.email@gmail.com
-          password: ${{ secrets.EM_PASSWORD }}  # App-specific password for Gmail
+          username: ${{ secrets.EM_USERNAME }}
+          password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
-          to: vonstrucker06@gmail.com  # From your earlier question
-          from: GitHub Actions <${{ secrets.EM_USERNAME }}>  # Matches MAIL_USERNAME
+          to: vonstrucker06@gmail.com
+          from: GitHub Actions <${{ secrets.EM_USERNAME }}>
           body: |
             A new commit was pushed to ${{ github.repository }}.
             Snyk scan completed. Check results: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Python script executed successfully.
           priority: normal
-          ignore_cert: false
-          nodemailerlog: false
-          nodemailerdebug: false
