@@ -48,7 +48,6 @@ jobs:
           to: vonstrucker06@gmail.com
           from: GitHub Actions <${{ secrets.EM_USERNAME }}>
           body: |
-            A new commit was pushed to ${{ github.repository }}.
             Snyk scan completed. Check results: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             Python script executed successfully.
-          priority: True
+          priority: normal
