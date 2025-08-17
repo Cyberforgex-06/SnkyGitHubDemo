@@ -45,9 +45,10 @@ jobs:
           username: ${{ secrets.EM_USERNAME }}
           password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
-          to: vonstrucker06@gmail.com
+          to: emmanuel.atitebi@gmail.com
           from: GitHub Actions <${{ secrets.EM_USERNAME }}>
           body: |
+            A new commit was pushed to ${{ github.repository }}.
             Snyk scan completed. Check results: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             Python script executed successfully.
           priority: normal
