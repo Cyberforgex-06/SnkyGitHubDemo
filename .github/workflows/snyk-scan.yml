@@ -51,4 +51,4 @@ jobs:
             A new commit was pushed to ${{ github.repository }}.
             Snyk scan completed. Check results: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
             Python script executed successfully.
-          priority: normal
+          priority: True
