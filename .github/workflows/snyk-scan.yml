@@ -45,13 +45,13 @@ jobs:
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com  # Replace with your SMTP server
+          server_address: smtp-relay.brevo.com  # Replace with your SMTP server
           server_port: 587
-          username: ${{ secrets.SMTP_USER }}
-          password: ${{ secrets.SMTP_PASS }}
+          username: ${{ secrets.EM_USERNAME }}
+          password: ${{ secrets.EM_PASSWORD }}
           subject: "GitHub Commit and Snyk Scan Results"
-          to: your-email@example.com  # Replace with recipient email
-          from: ${{ secrets.SMTP_USER }}  # Sender email
+          to: vonstrucker06@gmail.com  # Replace with recipient email
+          from: ${{ secrets.EM_USERNAME }}  # Sender email
           body: |
             Commit detected in ${{ github.repository }}.
             Commit SHA: ${{ github.sha }}
