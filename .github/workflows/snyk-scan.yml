@@ -1,60 +1,44 @@
-name: Snyk Scan and Python Script with Email
+name: Run Python Script with Snyk
+
 on:
-  push:
+  push:   # triggers whenever a commit is pushed
     branches:
-      - main  # Adjust to your default branch
+      - main   # or any branch you want
 
 jobs:
-  security-and-script:
+  snyk-job:
     runs-on: ubuntu-latest
+
     steps:
-      # Checkout the repository
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'  # Specify your Python version
+          python-version: '3.10'
 
-      # Install dependencies (if your script has any)
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          # Add pip install commands for dependencies, e.g., pip install requests
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
 
-      # Run Snyk to check for vulnerabilities
-      - name: Run Snyk
-        uses: snyk/actions/python@master  # Use appropriate Snyk action for your project (e.g., python, node)
+      - name: Run Python Script
+        run: python script.py
+
+      - name: Run Snyk Security Scan
+        uses: snyk/actions/python@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: monitor  # Use 'test' to fail on vulnerabilities, 'monitor' to report without failing
-          args: --severity-threshold=high  # Optional: Filter by severity
-        continue-on-error: true  # Continue even if vulnerabilities are found
-
-      # Run the Python script
-      - name: Run Python Script
-        run: python script.py  # Adjust path if script is in a subdirectory, e.g., scripts/script.py
-        env:
-          GITHUB_SHA: ${{ github.sha }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      # Send email notification
+          args: test
+          
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp-relay.brevo.com  # Replace with your SMTP server
+          server_address: smtp-relay.brevo.com
           server_port: 587
           username: ${{ secrets.EM_USERNAME }}
-          password: ${{ secrets.EM_PASSWORD }}
-          subject: "GitHub Commit and Snyk Scan Results"
-          to: vonstrucker06@gmail.com  # Replace with recipient email
-          from: ${{ secrets.EM_USERNAME }}  # Sender email
-          body: |
-            Commit detected in ${{ github.repository }}.
-            Commit SHA: ${{ github.sha }}
-            Snyk scan completed. Check GitHub Actions for details.
-            Python script executed successfully.
-          secure: true
+          password: ${{ secrets.EMA_PASSWORD }}
+          subject: "Commit Triggered: Python Script & Snyk Scan Completed"
+          to: emmanuel.atitebi06@gmail.com
+          from: GitHub Actions <${{ secrets.EM_USERNAME }}>
+          body: "Your Python script has run and Snyk scan is completed."
