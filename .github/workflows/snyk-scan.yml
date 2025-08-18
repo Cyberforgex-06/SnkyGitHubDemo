@@ -42,7 +42,7 @@ jobs:
 
       # Step 7: Send email notification
       - name: Send email notification
-        uses: dawidd6/action-send-mail@v3
+        uses: hilarion5/send-mail@v1
         with:
           server_address: smtp-relay.brevo.com
           server_port: 587
