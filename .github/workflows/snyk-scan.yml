@@ -44,14 +44,15 @@ jobs:
       - name: Send email notification
         uses: hilarion5/send-mail@v1
         with:
-          server_address: smtp-relay.brevo.com
-          server_port: 587
+          smtp-server: smtp-relay.brevo.com
+          smtp-port: 587
+          smtp-secure: true
           username: ${{ secrets.EM_USERNAME }}
           password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
-          to: emmanuel.abuad@gmail.com
-          from: GitHub Actions vonstrucker06@gmail.com
-          body: |
-            Snyk scan and Python script execution completed.
-            Check the GitHub Actions logs for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        continue-on-error: true
+          from-email: vonstrucker06@gmail.com
+          to-email: emmanuel.abuad@gmail.com
+          html: |
+            <h1> This is a test demo </h1>
+            <p> Yo </p.
+          
