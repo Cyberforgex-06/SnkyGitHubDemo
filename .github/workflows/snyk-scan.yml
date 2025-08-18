@@ -50,8 +50,8 @@ jobs:
           username: ${{ secrets.EM_USERNAME }}
           password: ${{ secrets.EM_PASSWORD }}
           subject: Snyk Scan and Python Script Execution Report
-          from-email: vonstrucker06@gmail.com
-          to-email: emmanuel.abuad@gmail.com
+          from-email: emmanuel.atitebi06@gmail.com
+          to-email: vonstrucker06@gmail.com
           html: |
             <h1> This is a test demo </h1>
             <p> Yo </p.
