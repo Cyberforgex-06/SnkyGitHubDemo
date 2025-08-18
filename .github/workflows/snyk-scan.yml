@@ -26,7 +26,7 @@ jobs:
           pip install snyk smtplib  # extra packages if not listed
 
       - name: Run Python Script
-        run: python your_script.py
+        run: python script.py
 
       - name: Run Snyk Security Scan
         uses: snyk/actions/python@master
@@ -38,11 +38,11 @@ jobs:
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USER }}
-          password: ${{ secrets.EMAIL_PASS }}
+          server_address: smtp-relay.brevo.com
+          server_port: 587
+          username: ${{ secrets.EM_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "Commit Triggered: Python Script & Snyk Scan Completed"
           to: yourmail@example.com
-          from: GitHub Actions <${{ secrets.EMAIL_USER }}>
+          from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
           body: "✅ Python script executed and Snyk scan finished."
