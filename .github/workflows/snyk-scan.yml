@@ -45,7 +45,7 @@ jobs:
         uses: hilarion5/send-mail@v1
         with:
           smtp-server: smtp-relay.brevo.com
-          smtp-port: 465
+          smtp-port: 587
           smtp-secure: true
           username: ${{ secrets.EM_USERNAME }}
           password: ${{ secrets.EM_PASSWORD }}
