@@ -54,5 +54,5 @@ jobs:
           to-email: vonstrucker06@gmail.com
           html: |
             <h1> This is a test demo </h1>
-            <p> Yo </p.
+            <p> Yo </p.>
           
