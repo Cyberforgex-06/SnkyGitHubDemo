@@ -53,6 +53,5 @@ jobs:
           from-email: emmanuel.abuad@gmail.com
           to-email: vonstrucker06@gmail.com
           html: |
-            <h1> This is a test demo blah</h1>
-            <p> Yo </p.>
+            <h1>You might need to fix the error in line 13. There's a vulnerability there. Prolly chnage the Library</h1>
           
